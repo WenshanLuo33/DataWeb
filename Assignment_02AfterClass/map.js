@@ -27,13 +27,13 @@ map.on('load', function () {
             'fill-color': [
                 'interpolate', ['linear'], ['to-number', ['get', 'fshri']],
                 0, '#d4f0ff',  
-                2, '#a2d2ff',  
-                4, '#6699ff',  
-                6, '#6a4cff',  
-                8, '#4a1cff',  
-                10, '#2a007f'  
+                1, '#a2d2ff',  
+                2, '#6699ff',  
+                3, '#6a4cff',  
+                4, '#4a1cff',  
+                5, '#3300a1'  
             ],
-            'fill-opacity': 0.3,
+            'fill-opacity': 0.25,
             'fill-outline-color': '#222'
         }
     });
@@ -90,43 +90,44 @@ map.on('load', function () {
     console.log("✅ Green Infrastructure Layer Added");
 
     // ✅ 交互：点击洪水多边形，弹出详细信息
-    map.on('click', 'flood-vulnerability-layer', function(e) {
-        let props = e.features[0].properties;
-        let coordinates = e.features[0].geometry.coordinates[0][0];
+map.on('click', 'flood-vulnerability-layer', function(e) {
+    let props = e.features[0].properties;
+    let coordinates = e.features[0].geometry.coordinates[0][0];
 
-        console.log("🟢 Feature clicked:", props);
+    console.log("🟢 Feature clicked:", props);
 
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(`
-                <h4>Flood Vulnerability</h4>
-                <p><b>Index:</b> ${props["fshri"] || 'Unknown'}</p>
-                <p><b>Area:</b> ${props["geoid"] || 'N/A'}</p>
-                <p><b>Storm Surge Present:</b> ${props["ss_cur"] || 'N/A'}</p>
-                <p><b>Storm Surge 2050s:</b> ${props["ss_50s"] || 'N/A'}</p>
-                <p><b>Storm Surge 2080s:</b> ${props["ss_80s"] || 'N/A'}</p>
-            `)
-            .addTo(map);
-    });
+    new mapboxgl.Popup({ className: 'flood-popup' }) // ✅ 添加不同的 class
+        .setLngLat(coordinates)
+        .setHTML(`
+            <h4>Flood Vulnerability</h4>
+            <p><b>FSHRI:</b> ${props["fshri"] || 'Unknown'}</p>
+            <p><b>Area:</b> ${props["geoid"] || 'N/A'}</p>
+            <p><b>Storm Surge Present:</b> ${props["ss_cur"] || 'N/A'}</p>
+            <p><b>Storm Surge 2050s:</b> ${props["ss_50s"] || 'N/A'}</p>
+            <p><b>Storm Surge 2080s:</b> ${props["ss_80s"] || 'N/A'}</p>
+        `)
+        .addTo(map);
+});
 
-    // ✅ 交互：点击 Green Infrastructure 点，弹出详细信息
-    map.on('click', 'green-infrastructure-layer', function(e) {
-        let props = e.features[0].properties;
-        let coordinates = e.features[0].geometry.coordinates.slice();
+// ✅ 交互：点击 Green Infrastructure 点，弹出详细信息
+map.on('click', 'green-infrastructure-layer', function(e) {
+    let props = e.features[0].properties;
+    let coordinates = e.features[0].geometry.coordinates.slice();
 
-        console.log("🟢 Green Infrastructure Feature clicked:", props);
+    console.log("🟢 Green Infrastructure Feature clicked:", props);
 
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(`
-                <h4>Green Infrastructure</h4>
-                <p><b>Project:</b> ${props["Project_Na"] || 'Unknown'}</p>
-                <p><b>Asset Type:</b> ${props["Asset_Type"] || 'Unknown'}</p>
-                <p><b>NYC Waters:</b> ${props["NYC_Waters"] || 'Unknown'}</p>
-                <p><b>Outfall:</b> ${props["Outfall"] || 'Unknown'}</p>
-            `)
-            .addTo(map);
-    });
+    new mapboxgl.Popup({ className: 'green-popup' }) // ✅ 添加不同的 class
+        .setLngLat(coordinates)
+        .setHTML(`
+            <h4>Green Infrastructure</h4>
+            <p><b>Project:</b> ${props["Project_Na"] || 'Unknown'}</p>
+            <p><b>Asset Type:</b> ${props["Asset_Type"] || 'Unknown'}</p>
+            <p><b>NYC Waters:</b> ${props["NYC_Waters"] || 'Unknown'}</p>
+            <p><b>Outfall:</b> ${props["Outfall"] || 'Unknown'}</p>
+        `)
+        .addTo(map);
+});
+
 
     // ✅ 鼠标悬停时显示指针
     map.on('mouseenter', 'flood-vulnerability-layer', function() {

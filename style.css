@@ -428,6 +428,33 @@ body {
 }
 
 
+/* 📌 洪水的 popup（淡淡的灰色，带蓝紫色调） */
+.flood-popup .mapboxgl-popup-content {
+  background-color: #ECECF5;  /* 淡蓝紫灰色 */
+  color: #33334F;  /* 深一点的蓝灰色 */
+  border-radius: 5px;
+  border: 1px solid #C8C8E0; /* 低饱和度蓝紫色边框 */
+  font-family: Arial, sans-serif;
+}
+
+/* 📌 Green Infrastructure 的 popup（保持默认或修改） */
+.green-popup .mapboxgl-popup-content {
+  background-color: #F5FBEF;  /* 淡绿色 */
+  color: #4A6A30;  /* 绿色系文字 */
+  border-radius: 5px;
+  border: 1px solid #C6E5B1; /* 低饱和度绿色边框 */
+  font-family: Arial, sans-serif;
+}
+
+/* 让 popup 的箭头颜色也跟随变 */
+.flood-popup .mapboxgl-popup-tip {
+  border-top-color: #ECECF5;
+}
+.green-popup .mapboxgl-popup-tip {
+  border-top-color: #F5FBEF;
+}
+
+
 
 /* 📌 让导航栏固定在顶部 */
 .navbar {
