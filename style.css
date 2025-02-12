@@ -366,11 +366,11 @@ body {
   height: 100vh;
 }
 
-/* ✅ 设置 Legend 样式 */
+/* 📌 让 legend 显示在地图左侧 */
 #legend {
   position: absolute;
   bottom: 30px;
-  right: 20px;
+  left: 20px; /* ✅ 由 right 改成 left */
   width: 300px;
   background: rgba(255, 255, 255, 0.9);
   padding: 15px;
@@ -380,27 +380,34 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
+/* 📌 让标题左对齐 */
 .legend-title {
+  font: 1em/1.5em 'Open Sans', sans-serif;
   font-size: 18px;
   font-weight: bold;
-  color: #2a007f;
-  text-align: center;
+  color: #02007f;
+  text-align: left; /* ✅ 由 center 改成 left */
   margin-bottom: 10px;
 }
 
+/* 📌 让描述左对齐 */
 .legend-description {
+  font: 1em/1.5em 'Open Sans', sans-serif;
   font-size: 12px;
   color: #555;
   line-height: 1.4;
-  text-align: justify;
+  text-align: left; /* ✅ 由 justify 改成 left */
   margin-bottom: 10px;
 }
 
+/* 📌 让所有 legend 内容左对齐 */
 #legend h4 {
+  font: 1em/1.5em 'Open Sans', sans-serif;
   margin: 10px 0 5px;
   font-size: 14px;
   font-weight: bold;
   color: #333;
+  text-align: left; /* ✅ 让所有标题左对齐 */
 }
 
 #legend div {
@@ -417,13 +424,14 @@ body {
   border-radius: 3px;
 }
 
+
 /* 📌 让导航栏固定在顶部 */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95); /* 透明度 95%，不完全挡住地图 */
+  background: rgba(255, 255, 255, 0.90); /* 透明度 95%，不完全挡住地图 */
   padding: 10px 20px;
   display: flex;
   justify-content: center;
