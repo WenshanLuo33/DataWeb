@@ -371,21 +371,22 @@ body {
   position: absolute;
   bottom: 30px;
   left: 20px; /* ✅ 由 right 改成 left */
-  width: 300px;
+  width: 350px;
   background: rgba(255, 255, 255, 0.9);
   padding: 15px;
   border-radius: 8px;
+  font: 1em/1.5em 'Open Sans', sans-serif;
   font-family: Arial, sans-serif;
-  font-size: 14px;
+  font-size: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* 📌 让标题左对齐 */
 .legend-title {
   font: 1em/1.5em 'Open Sans', sans-serif;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: bold;
-  color: #02007f;
+  color: #0d0d2b;
   text-align: left; /* ✅ 由 center 改成 left */
   margin-bottom: 10px;
 }
@@ -404,7 +405,7 @@ body {
 #legend h4 {
   font: 1em/1.5em 'Open Sans', sans-serif;
   margin: 10px 0 5px;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
   color: #333;
   text-align: left; /* ✅ 让所有标题左对齐 */
@@ -416,13 +417,16 @@ body {
   margin-bottom: 5px;
 }
 
+/* 📌 让洪水颜色透明 */
 #legend span {
   width: 20px;
   height: 10px;
   margin-right: 10px;
   display: inline-block;
   border-radius: 3px;
+  opacity: 0.7; /* ✅ 让所有颜色块都有透明度 */
 }
+
 
 
 /* 📌 让导航栏固定在顶部 */

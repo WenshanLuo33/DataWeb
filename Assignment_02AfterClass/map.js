@@ -2,9 +2,9 @@ mapboxgl.accessToken = "pk.eyJ1Ijoid2VuMyIsImEiOiJjbTZpZGk0dDYwNnhqMm1vaGNtc2pyc
 
 const map = new mapboxgl.Map({
     container: "map",
-    style: "mapbox://styles/wen3/cm6q2kgh700xi01qq9nlq2i76",
+    style: "mapbox://styles/wen3/cm72arjk5001701qqdxwcg5rn",
     zoom: 12,
-    center: [-73.86, 40.75], // Flushing Bay
+    center: [-73.86, 40.745], // Flushing Bay
     maxZoom: 15,
     minZoom: 8,
     maxBounds: [[-74.45, 40.45], [-73.55, 41]]
@@ -33,7 +33,7 @@ map.on('load', function () {
                 8, '#4a1cff',  
                 10, '#2a007f'  
             ],
-            'fill-opacity': 0.5,
+            'fill-opacity': 0.3,
             'fill-outline-color': '#222'
         }
     });
@@ -52,9 +52,35 @@ map.on('load', function () {
         type: 'circle',
         source: 'green-infrastructure',
         paint: {
-            'circle-color': '#505050', // ✅ 统一为绿色
-            'circle-radius': 3.2,
-            'circle-opacity': 0.90,
+            'circle-color': [
+                'match', ['get', 'Asset_Type'],
+                'Rain Garden', '#96b43e',         // 绿松石色
+                'ROWRG', '#96b43e',              // 绿松石色 (Rain Garden)
+                'Green Roof', '#519752',         // 橙色
+                'Combined Blue/Green Roof', '#519752', // 橙色 (Green Roof)
+                'ROW Porous Concrete', '#cea3ea', // 蓝紫色
+                'Permeable Pavers', '#cea3ea',   // 蓝紫色 (Permeable Pavement)
+                'Porous Asphalt', '#cea3ea',     // 蓝紫色
+                'Subsurface Storage', '#E78AC3', // 粉色
+                'Subsurface Detention System', '#E78AC3', // 粉色
+                'Synthetic Turf Field Storage Layer', '#E78AC3', // 粉色
+                'ROWB', '#ffcb63',               // 亮绿色
+                'ROWGS', '#ffcb63',              // 亮绿色
+                'ROWSGS', '#ffcb63',             // 亮绿色
+                'ROW Median', '#ffcb63',         // 亮绿色
+                'ROW Infiltration Basin with Concrete Top', '#dd6c59', // 深蓝色
+                'ROW Infiltration Basin with Grass Top', '#dd6c59', // 深蓝色
+                'ROW Infiltration Basin with Combination of Concrete and Grass Top', '#dd6c59', // 深蓝色
+                /* 其他情况 */
+                '#929292' // 其他 (黄色)
+            ],
+            'circle-radius': [
+                'interpolate', ['linear'], ['zoom'],
+                8, 0.8,   
+                12, 3.2,  
+                15, 9  
+            ],
+            'circle-opacity': 0.9,
             'circle-stroke-width': 1,
             'circle-stroke-color': '#ffffff'
         }
@@ -94,9 +120,10 @@ map.on('load', function () {
             .setLngLat(coordinates)
             .setHTML(`
                 <h4>Green Infrastructure</h4>
-                <p><b>Type:</b> ${props["Type"] || 'Unknown'}</p>
-                <p><b>Location:</b> ${props["Location"] || 'N/A'}</p>
-                <p><b>Status:</b> ${props["Status"] || 'Unknown'}</p>
+                <p><b>Project:</b> ${props["Project_Na"] || 'Unknown'}</p>
+                <p><b>Asset Type:</b> ${props["Asset_Type"] || 'Unknown'}</p>
+                <p><b>NYC Waters:</b> ${props["NYC_Waters"] || 'Unknown'}</p>
+                <p><b>Outfall:</b> ${props["Outfall"] || 'Unknown'}</p>
             `)
             .addTo(map);
     });

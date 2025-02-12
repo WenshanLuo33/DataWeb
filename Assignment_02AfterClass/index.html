@@ -22,26 +22,34 @@
 
     <div id="map"></div> 
   <!-- 📌 Legend 放在 HTML 里 -->
-     <div id="legend">
+    <div id="legend">
       <h2 class="legend-title">Where Does NYC Need More Green Infrastructure for Flood Resilience?</h2>
       <p class="legend-description">
-          New York City faces increasing flood risks. This study combines <strong>Flood Vulnerability Index (FVI)</strong> and 
-          <strong>Green Infrastructure (GI)</strong> data to explore their relationship. FVI assesses flood-prone areas, while GI—such as 
-          rain gardens and green roofs—helps mitigate flooding impacts. The study examines whether GI is effectively deployed in high-risk 
-          zones and proposes optimization strategies to enhance urban resilience and water management.
+        New York City faces increasing flood risks. This study combines <strong>Flood Vulnerability Index (FVI)</strong> and 
+        <strong>Green Infrastructure (GI)</strong> data to explore their relationship. FVI assesses flood-prone areas, while GI—such as 
+        rain gardens and green roofs—helps mitigate flooding impacts. The study examines whether GI is effectively deployed in high-risk 
+        zones and proposes optimization strategies to enhance urban resilience and water management.
       </p>
       <hr>
       <h4>Flood Vulnerability Index</h4>
-      <div><span style="background:#d4f0ff"></span> Very Low (0-2)</div>
-      <div><span style="background:#a2d2ff"></span> Low (2-4)</div>
-      <div><span style="background:#6699ff"></span> Moderate (4-6)</div>
-      <div><span style="background:#6a4cff"></span> High (6-8)</div>
-      <div><span style="background:#4a1cff"></span> Very High (8-10)</div>
-      <div><span style="background:#2a007f"></span> Extreme (>10)</div>
+      <div><span style="background:rgba(212, 240, 255, 0.5)"></span> Very Low (0-2)</div>
+      <div><span style="background:rgba(162, 210, 255, 0.5)"></span> Low (2-4)</div>
+      <div><span style="background:rgba(141, 176, 252, 0.5)"></span> Moderate (4-6)</div>
+      <div><span style="background:rgba(116, 119, 255, 0.5)"></span> High (6-8)</div>
+      <div><span style="background:rgba(77, 98, 255, 0.5)"></span> Very High (8-10)</div>
+      <div><span style="background:rgba(63, 20, 255, 0.5)"></span> Extreme (>10)</div>
       <hr>
-      <h4>Green Infrastructure</h4>
-      <div><span style="background:#505050; border-radius: 50%; width: 10px; height: 10px;"></span> Green Infrastructure</div>
-    </div>
+      <h4>Green Infrastructure Types</h4>
+      <div><span style="background:#96b43e"></span> Rain Garden</div>
+      <div><span style="background:#519752"></span> Green Roof</div>
+      <div><span style="background:#cea3ea"></span> Permeable Pavement</div>
+      <div><span style="background:#E78AC3"></span> Subsurface Storage</div>
+      <div><span style="background:#ffcb63"></span> ROW Bioswales</div>
+      <div><span style="background:#dd6c59"></span> ROW Infiltration Basins</div>
+      <div><span style="background:#929292"></span> Other</div>
+
+  </div>
+
 
     <script src="./map.js"></script>
   </body>
