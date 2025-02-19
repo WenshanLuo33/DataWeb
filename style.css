@@ -493,3 +493,41 @@ body {
   color: gray;
   text-decoration: underline;
 }
+
+body {
+  display: block;
+}
+
+
+
+
+
+
+
+/* ✅ 让介绍部分有合适的间距 */
+#introduction {
+  max-width: 800px; /* ✅ 控制最大宽度，避免文字铺满整个屏幕 */
+  margin: 120px auto 60px; /* ✅ 顶部 120px（防止贴近导航栏），底部 60px */
+  padding: 20px;
+  text-align: center;
+}
+
+/* ✅ 让介绍文字不会贴边，并且适应不同屏幕 */
+#introduction p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  text-align: justify;
+  margin: 0 40px; /* ✅ 让文字两侧有 40px 的留白，提高可读性 */
+}
+
+/* ✅ 让超链接更美观 */
+#introduction a {
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#introduction a:hover {
+  text-decoration: underline;
+}

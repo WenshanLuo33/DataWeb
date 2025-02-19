@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Wenshan Luo" />
+    <meta name="keywords" content="urban design, commuting, data visualization, new york" />
+    <title>Commuting Time Map</title>
+
+    <!-- CSS 样式 -->
+    <link rel="stylesheet" href="../style.css" />
+
+    <!-- Mapbox CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="nav-title" href="../index.html">Wen 3</a>
+        <a class="nav-link" href="../pages/about.html">About</a>
+        <a class="nav-link" href="../pages/writing.html">Writing</a>
+        <a class="nav-link" href="mailto:wl763@cornell.edu">Contact</a>
+      </nav>
+    </header>
+
+    <div id="map"></div>
+
+    <!-- 📌 地图信息框 -->
+    <div id="map-info">
+
+
+      <div id="legend">
+        <h2 class="legend-title">Aggregate Travel Time to Work in NYC (mins) - Mercator Projection</h2>
+        <p class="legend-description">
+          This map visualizes the estimated <strong>commute time</strong> in NYC census tracts using
+        <strong>natural breaks (Jenks)</strong>. Lighter colors indicate shorter travel times, while darker colors represent longer commutes.
+        </p>
+        <hr>
+        <h4>Commute Time (mins)</h4>
+        <div><span style="background:#f2f0f7"></span> 0 - 40000</div>
+        <div><span style="background:#cbc9e2"></span> 40000 - 64000</div>
+        <div><span style="background:#9e9ac8"></span> 64000 - 90000</div>
+        <div><span style="background:#756bb1"></span> 90000 - 125000</div>
+        <div><span style="background:#54278f"></span> 125000 - 260000</div>
+      </div>
+    </div>
+    
+    
+
+    <!-- Map JS -->
+    <script src="./map.js"></script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ✅ 让地图填满屏幕 */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  
+  /* 📌 让标题左对齐 */
+  .legend-title {
+    font: 1em/1.5em 'Open Sans', sans-serif;
+    font-size: 19px;
+    font-weight: bold;
+    color: #0d0d2b;
+    text-align: left; /* ✅ 由 center 改成 left */
+    margin-bottom: 10px;
+  }
+  
+  /* 📌 让描述左对齐 */
+  .legend-description {
+    font: 1em/1.5em 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.4;
+    text-align: left; /* ✅ 由 justify 改成 left */
+    margin-bottom: 10px;
+  }
+  
+  /* 📌 让所有 legend 内容左对齐 */
+  #legend h4 {
+    font: 1em/1.5em 'Open Sans', sans-serif;
+    margin: 10px 0 5px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: left; /* ✅ 让所有标题左对齐 */
+  }
+  
+  #legend div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  /* 📌 让洪水颜色透明 */
+  #legend span {
+    width: 20px;
+    height: 10px;
+    margin-right: 10px;
+    display: inline-block;
+    border-radius: 3px;
+    opacity: 0.7; /* ✅ 让所有颜色块都有透明度 */
+  }
+  
+  
+  /* 📌 洪水的 popup（淡淡的灰色，带蓝紫色调） */
+  .flood-popup .mapboxgl-popup-content {
+    background-color: #ECECF5;  /* 淡蓝紫灰色 */
+    color: #33334F;  /* 深一点的蓝灰色 */
+    border-radius: 5px;
+    border: 1px solid #C8C8E0; /* 低饱和度蓝紫色边框 */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* 📌 Green Infrastructure 的 popup（保持默认或修改） */
+  .green-popup .mapboxgl-popup-content {
+    background-color: #F5FBEF;  /* 淡绿色 */
+    color: #4A6A30;  /* 绿色系文字 */
+    border-radius: 5px;
+    border: 1px solid #C6E5B1; /* 低饱和度绿色边框 */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* 让 popup 的箭头颜色也跟随变 */
+  .flood-popup .mapboxgl-popup-tip {
+    border-top-color: #ECECF5;
+  }
+  .green-popup .mapboxgl-popup-tip {
+    border-top-color: #F5FBEF;
+  }
+  
+  
+  
+  /* 📌 让导航栏固定在顶部 */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.90); /* 透明度 95%，不完全挡住地图 */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* 确保导航栏在最上方 */
+  }
+  
+  /* 📌 让地图填满屏幕，但不被导航栏遮住 */
+  #map {
+    position: absolute;
+    top: 50px; /* 避免被导航栏遮挡 */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 50px);
+  }
+  
+  /* 📌 导航栏链接样式 */
+  .navbar a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .navbar a:hover {
+    color: gray;
+    text-decoration: underline;
+  }
+  
+
+
+
+
+
+/* 📌 让 legend 显示在地图左侧 */
+#legend {
+  position: absolute;
+  bottom: 100px;
+  left: 20px; /* ✅ 由 right 改成 left */
+  width: 350px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 8px;
+  font: 1em/1.5em 'Open Sans', sans-serif;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  margin-top: 430px;
+  position: relative; /* ✅ 确保它属于 #map-info */
+}
+
+
+
+/* ✅ 颜色条样式 */
+.gradient-bar {
+  width: 200px;
+  height: 15px;
+  background: linear-gradient(to right, #f2f0f7, #cbc9e2, #9e9ac8, #756bb1, #54278f, #3f007d);
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+/* ✅ 线性图例的数值刻度 */
+.legend-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+
+
+
+

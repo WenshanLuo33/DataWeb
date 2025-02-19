@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Wenshan Luo" />
+    <meta name="keywords" content="architecture design, storytelling, urban design, new york" />
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="nav-title" href="../index.html">Wen 3</a>
+        <a class="nav-link" href="../pages/about.html">About</a>
+        <a class="nav-link" href="../pages/writing.html">Writing</a>
+        <a class="nav-link" href="mailto:wl763@cornell.edu">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <!-- ✅ 介绍部分，带有 Colab Notebook 链接 -->
+      <section id="introduction">
+        <h1>Exploring Urban Data through Web Mapping</h1>
+        <p>
+          This project visualizes urban commuting patterns using different spatial data classification methods and projections.
+          Each map employs a unique technique to analyze aggregate travel time to work in New York City.
+        </p>
+
+        <p>
+          
+          All data processing and analysis were conducted in 
+          <a href="https://colab.research.google.com/drive/1UfpNu6tgf-xktI5dDlnJrUKc7e-HckVi#scrollTo=mKM4E1Q5tKiu" target="_blank">
+            my Colab notebook
+          </a>.
+        </p>
+      </section>
+    
+      <!-- ✅ 这里是地图项目部分 -->  
+      <section id="projects reveal">
+        <div class="project">
+          <a href="Map01/index.html">
+            <img class="project-thumbnail" src="picture/Map01_NaturalBreaks.jpg" alt="Natural Breaks" />
+          </a>
+          <p class="project-title">Natural Breaks with Mercator projection</p>
+        </div>
+
+        <div class="project reveal">
+          <a href="Map02/index.html">
+            <img class="project-thumbnail" src="picture/Map02_Quantiles.jpg" alt="Web Map" />
+          </a>
+          <p class="project-title">Quantiles with Global Map</p>
+        </div>
+        
+        <div class="project reveal">
+          <a href="Map03/index.html">
+            <img class="project-thumbnail" src="picture/Map03_WinkelTripel.jpg" alt="Web Map" />
+          </a>
+          <p class="project-title">Linear Gradient with Winkel Tripel projection</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2024 Wenshan Luo | <a href="mailto:wl763@cornell.edu">Email Me</a></p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
