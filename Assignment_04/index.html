@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Choropleth Map with Zoom-Level Data</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+    <style>
+      /* ✅ 让地图填满屏幕 */
+      body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+      #map { position: absolute; top: 50px; left: 0; width: 100%; height: calc(100vh - 50px); }
+
+      /* ✅ 固定导航栏 */
+      .navbar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          padding: 10px 20px;
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+      }
+
+      .navbar a {
+          text-decoration: none;
+          color: black;
+          font-size: 1rem;
+          font-weight: bold;
+          transition: color 0.3s;
+      }
+
+      .navbar a:hover {
+          color: gray;
+          text-decoration: underline;
+      }
+
+      /* ✅ 让 legend 显示在左侧 */
+      .legend {
+          position: absolute;
+          bottom: 30px;
+          left: 20px; /* ✅ 由 right 改成 left */
+          width: 320px;
+          max-height: 430px; /* ✅ 限制 legend 高度，避免过长 */
+          overflow-y: auto; /* ✅ 允许滚动 */
+          background: rgba(255, 255, 255, 0.9);
+          padding: 15px;
+          border-radius: 8px;
+          font-size: 12px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .legend h3 {
+          font-size: 16px;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+
+      .legend p {
+          font-size: 12px;
+          color: #555;
+          line-height: 1.4;
+          text-align: left;
+          margin-bottom: 10px;
+      }
+
+      .legend h4 {
+          font-size: 14px;
+          font-weight: bold;
+          margin: 10px 0 5px;
+          color: #333;
+      }
+
+      .legend div {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+      }
+
+      .legend div span {
+          width: 12px;
+          height: 12px;
+          margin-right: 8px;
+          display: inline-block;
+          border-radius: 3px;
+      }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a class="nav-title" href="../index.html">Wen 3</a>
+      <a class="nav-link" href="../pages/about.html">About</a>
+      <a class="nav-link" href="../pages/writing.html">Writing</a>
+      <a class="nav-link" href="mailto:wl763@cornell.edu">Contact</a>
+    </nav>
+  </header>
+
+  <!-- 信息框（标题和描述） -->
+
+<div id="map"></div>
+
+<!-- Census Tract Legend -->
+<div id="tract-legend" class="legend">
+  <h3>Commuting Time Across the U.S.</h3>
+  <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'.</p>
+  <hr>
+  <h4>Commuters Count (Census Tract)</h4>
+  <div><span style="background-color: #8B5A65"></span> 400,000+</div>
+  <div><span style="background-color: #A7727D"></span> 250,000</div>
+  <div><span style="background-color: #C08591"></span> 100,000</div>
+  <div><span style="background-color: #D8A29E"></span> 50,000</div>
+  <div><span style="background-color: #E8C2CA"></span> 25,000</div>
+  <div><span style="background-color: #F2D4D7"></span> 10,000</div>
+  <div><span style="background-color: #F6E7E6"></span> 5,000</div>
+  <div><span style="background-color: #F9EFED"></span> 1,000</div>
+  <div><span style="background-color: #FCF6F5"></span> 70+</div>
+</div>
+
+<!-- Census County Legend -->
+<div id="county-legend" class="legend" style="display: none">
+  <h3>Commuting Time Across the U.S.</h3>
+  <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'.</p>
+  <hr>
+  <h4>Commuters Count (County)</h4>
+  <div><span style="background-color: #8B5A65"></span> 50,000,000+</div>
+  <div><span style="background-color: #A7727D"></span> 25,000,000</div>
+  <div><span style="background-color: #C08591"></span> 10,000,000</div>
+  <div><span style="background-color: #D8A29E"></span> 5,000,000</div>
+  <div><span style="background-color: #E8C2CA"></span> 1,000,000</div>
+  <div><span style="background-color: #F2D4D7"></span> 500,000</div>
+  <div><span style="background-color: #F6E7E6"></span> 100,000</div>
+  <div><span style="background-color: #F9EFED"></span> 10,000</div>
+  <div><span style="background-color: #FCF6F5"></span> 1,065+</div>
+</div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuMyIsImEiOiJjbTZpZGk0dDYwNnhqMm1vaGNtc2pyc29pIn0.R1YUPm_wlHzWpnWvsp8dIQ';
+
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/wen3/cm7chdf7x002z01qo51indd1p',
+    center: [-98, 38.88],  // 地图初始中心点
+    zoom: 3,               // 地图初始缩放级别
+    minZoom: 3.5,            // ✅ 限制最小缩放级别（不让用户缩小到全球级别）
+    maxZoom: 10            // ✅ 限制最大缩放级别（不让用户放大到过于细节）
+});
+
+  const zoomThreshold = 5;
+
+  map.on('load', () => {
+      // Load Census Tracts
+      map.addSource('tracts', {
+          type: 'geojson',
+          data: 'data/census_tracts_final.geojson'
+      });
+
+      // Load Counties
+      map.addSource('counties', {
+          type: 'geojson',
+          data: 'data/census_counties_final.geojson'
+      });
+
+      // 📌 更新 **County Layer** 颜色（粉红色系）
+      map.addLayer({
+          id: 'county-layer',
+          type: 'fill',
+          source: 'counties',
+          maxzoom: zoomThreshold,
+          paint: {
+              'fill-color': [
+                  'interpolate', ['linear'], ['get', 'B08013_001E'],
+                  1000, '#FCF6F5',   // 最短通勤时间（浅粉）
+                  50000, '#F8BBD0',
+                  100000, '#F9EFED',
+                  500000, '#F2D4D7',
+                  1000000, '#E8C2CA',
+                  5000000, '#D8A29E',
+                  10000000, '#C08591',
+                  25000000, '#A7727D',
+                  50000000, '#8B5A65'  // 最长通勤时间（酒红）
+              ],
+              'fill-opacity': 0.8
+          }
+      });
+
+      // 📌 更新 **Tract Layer** 颜色（粉红色系）
+      map.addLayer({
+          id: 'tract-layer',
+          type: 'fill',
+          source: 'tracts',
+          minzoom: zoomThreshold,
+          paint: {
+              'fill-color': [
+                  'interpolate', ['linear'], ['get', 'B08013_001E'],
+                  70, '#FCF6F5',    // 最短通勤时间（浅粉）
+                  1000, '#F8BBD0',
+                  5000, '#F9EFED',
+                  10000, '#F2D4D7',
+                  50000, '#E8C2CA',
+                  100000, '#D8A29E',
+                  250000, '#C08591',
+                  400000, '#A7727D',
+                  500000, '#8B5A65'  // 最长通勤时间（酒红）
+              ],
+              'fill-opacity': 0.8
+          }
+      });
+
+      // Toggle legend based on zoom level
+      const tractLegend = document.getElementById('tract-legend');
+      const countyLegend = document.getElementById('county-legend');
+
+      map.on('zoom', () => {
+          if (map.getZoom() > zoomThreshold) {
+              tractLegend.style.display = 'block';
+              countyLegend.style.display = 'none';
+          } else {
+              tractLegend.style.display = 'none';
+              countyLegend.style.display = 'block';
+          }
+      });
+  });
+</script>
+
+</body>
+</html>
