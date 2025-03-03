@@ -104,27 +104,13 @@
 
 <div id="map"></div>
 
-<!-- Census Tract Legend -->
-<div id="tract-legend" class="legend">
-  <h3>Commuting Time Across the U.S.</h3>
-  <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'.</p>
-  <hr>
-  <h4>Commuters Count (Census Tract)</h4>
-  <div><span style="background-color: #8B5A65"></span> 400,000+</div>
-  <div><span style="background-color: #A7727D"></span> 250,000</div>
-  <div><span style="background-color: #C08591"></span> 100,000</div>
-  <div><span style="background-color: #D8A29E"></span> 50,000</div>
-  <div><span style="background-color: #E8C2CA"></span> 25,000</div>
-  <div><span style="background-color: #F2D4D7"></span> 10,000</div>
-  <div><span style="background-color: #F6E7E6"></span> 5,000</div>
-  <div><span style="background-color: #F9EFED"></span> 1,000</div>
-  <div><span style="background-color: #FCF6F5"></span> 70+</div>
-</div>
 
 <!-- Census County Legend -->
 <div id="county-legend" class="legend" style="display: none">
   <h3>Commuting Time Across the U.S.</h3>
-  <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'.</p>
+  <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'. Metropolitan areas have longer commuting times, such as NYC, Chicago, and Washington, D.C. 
+    
+    In this dataset, we did have data for California, Colorado, Arizona, Arkansas, Alabama and Connecticut</p>
   <hr>
   <h4>Commuters Count (County)</h4>
   <div><span style="background-color: #8B5A65"></span> 50,000,000+</div>
@@ -137,6 +123,25 @@
   <div><span style="background-color: #F9EFED"></span> 10,000</div>
   <div><span style="background-color: #FCF6F5"></span> 1,065+</div>
 </div>
+
+ <!-- State Legend -->
+ <div id="state-legend" class="legend">
+    <h3>Commuting Time Across the U.S.</h3>
+    <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'. The three states with the longest commuting times are New York, Texas, and Florida. 
+        
+        In this dataset, we did have data for California, Colorado, Arizona, Arkansas, Alabama and Connecticut</p>
+    <hr>
+    <h4>Commuters Count (State)</h4>
+    <div><span style="background-color: #8B5A65"></span> 300,000,000+</div>
+    <div><span style="background-color: #A7727D"></span> 250,000,000</div>
+    <div><span style="background-color: #C08591"></span> 200,000,000</div>
+    <div><span style="background-color: #D8A29E"></span> 150,000,000</div>
+    <div><span style="background-color: #E8C2CA"></span> 100,000,000</div>
+    <div><span style="background-color: #F2D4D7"></span> 50,000,000</div>
+    <div><span style="background-color: #F6E7E6"></span> 10,000,000</div>
+    <div><span style="background-color: #F9EFED"></span> 5,000,000</div>
+    <div><span style="background-color: #FCF6F5"></span> 4,790,000+</div>
+  </div>
 
 <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuMyIsImEiOiJjbTZpZGk0dDYwNnhqMm1vaGNtc2pyc29pIn0.R1YUPm_wlHzWpnWvsp8dIQ';
@@ -153,24 +158,49 @@
   const zoomThreshold = 5;
 
   map.on('load', () => {
-      // Load Census Tracts
-      map.addSource('tracts', {
-          type: 'geojson',
-          data: 'data/census_tracts_final.geojson'
-      });
-
       // Load Counties
       map.addSource('counties', {
           type: 'geojson',
           data: 'data/census_counties_final.geojson'
       });
+      
+      // Load states
+      map.addSource('states', {
+          type: 'geojson',
+          data: 'data/census_states_final.geojson'
+      });
+
+
+      // 📌 更新 **states Layer** 颜色（粉红色系）
+      map.addLayer({
+          id: 'state-layer',
+          type: 'fill',
+          source: 'states',
+          maxzoom: zoomThreshold,
+          paint: {
+              'fill-color': [
+                  'interpolate', ['linear'], ['get', 'B08013_001E'],
+                  4790000, '#FCF6F5',    // 最短通勤时间（浅粉）
+                  5000000, '#F8BBD0',
+                  10000000, '#F9EFED',
+                  50000000, '#F2D4D7',
+                  100000000, '#E8C2CA',
+                  150000000, '#D8A29E',
+                  200000000, '#C08591',
+                  250000000, '#A7727D',
+                  300000000, '#8B5A65'  // 最长通勤时间（酒红）
+              ],
+              'fill-opacity': 0.8
+          }
+      });
+
 
       // 📌 更新 **County Layer** 颜色（粉红色系）
       map.addLayer({
           id: 'county-layer',
           type: 'fill',
           source: 'counties',
-          maxzoom: zoomThreshold,
+          minzoom: zoomThreshold,
           paint: {
               'fill-color': [
                   'interpolate', ['linear'], ['get', 'B08013_001E'],
@@ -188,42 +218,57 @@
           }
       });
 
-      // 📌 更新 **Tract Layer** 颜色（粉红色系）
-      map.addLayer({
-          id: 'tract-layer',
-          type: 'fill',
-          source: 'tracts',
-          minzoom: zoomThreshold,
-          paint: {
-              'fill-color': [
-                  'interpolate', ['linear'], ['get', 'B08013_001E'],
-                  70, '#FCF6F5',    // 最短通勤时间（浅粉）
-                  1000, '#F8BBD0',
-                  5000, '#F9EFED',
-                  10000, '#F2D4D7',
-                  50000, '#E8C2CA',
-                  100000, '#D8A29E',
-                  250000, '#C08591',
-                  400000, '#A7727D',
-                  500000, '#8B5A65'  // 最长通勤时间（酒红）
-              ],
-              'fill-opacity': 0.8
-          }
-      });
-
+      
       // Toggle legend based on zoom level
-      const tractLegend = document.getElementById('tract-legend');
       const countyLegend = document.getElementById('county-legend');
+      const stateLegend = document.getElementById('state-legend');
 
       map.on('zoom', () => {
           if (map.getZoom() > zoomThreshold) {
-              tractLegend.style.display = 'block';
-              countyLegend.style.display = 'none';
-          } else {
-              tractLegend.style.display = 'none';
               countyLegend.style.display = 'block';
+              stateLegend.style.display = 'none';
+          } else {
+              countyLegend.style.display = 'none';
+              stateLegend.style.display = 'block';
           }
       });
+
+
+      // ✅ 添加 Popup 功能
+      const popup = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false
+      });
+
+      function showPopup(e, layerId, featureNameProp) {
+          const features = map.queryRenderedFeatures(e.point, { layers: [layerId] });
+          if (!features.length) {
+              popup.remove();
+              return;
+          }
+
+          const feature = features[0];
+          const name = feature.properties[featureNameProp];  // 取名称字段（State Name 或 County Name）
+          const commuteTime = feature.properties.B08013_001E;  // 通勤时间数据
+
+          popup.setLngLat(e.lngLat)
+               .setHTML(`<strong>${name}</strong><br>Commuting Time: ${commuteTime} minutes`)
+               .addTo(map);
+      }
+
+      // ✅ 监听 State 层鼠标移动事件
+      map.on('mousemove', 'state-layer', (e) => {
+          showPopup(e, 'state-layer', 'NAME_y');  // 假设 State 名称字段是 "NAME"
+      });
+
+      // ✅ 监听 County 层鼠标移动事件
+      map.on('mousemove', 'county-layer', (e) => {
+          showPopup(e, 'county-layer', 'NAME_y');  // 假设 County 名称字段是 "NAME"
+      });
+
+      // ✅ 监听鼠标移出时隐藏 Popup
+      map.on('mouseleave', 'state-layer', () => popup.remove());
+      map.on('mouseleave', 'county-layer', () => popup.remove());
   });
 </script>
 
