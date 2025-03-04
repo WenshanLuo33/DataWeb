@@ -108,9 +108,7 @@
 <!-- Census County Legend -->
 <div id="county-legend" class="legend" style="display: none">
   <h3>Commuting Time Across the U.S.</h3>
-  <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'. Metropolitan areas have longer commuting times, such as NYC, Chicago, and Washington, D.C. 
-    
-    In this dataset, we did have data for California, Colorado, Arizona, Arkansas, Alabama and Connecticut</p>
+  <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'. Metropolitan areas have longer commuting times, such as NYC, Chicago, and Washington, D.C. </p>
   <hr>
   <h4>Commuters Count (County)</h4>
   <div><span style="background-color: #8B5A65"></span> 50,000,000+</div>
@@ -127,9 +125,7 @@
  <!-- State Legend -->
  <div id="state-legend" class="legend">
     <h3>Commuting Time Across the U.S.</h3>
-    <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'. The three states with the longest commuting times are New York, Texas, and Florida. 
-        
-        In this dataset, we did have data for California, Colorado, Arizona, Arkansas, Alabama and Connecticut</p>
+    <p>This map visualizes "aggregate travel time to work (in minutes)" using data from the 'Census Bureau's ACS Table B08013'. The three states with the longest commuting times are New York, Texas, and Florida.  </p>
     <hr>
     <h4>Commuters Count (State)</h4>
     <div><span style="background-color: #8B5A65"></span> 300,000,000+</div>
@@ -155,7 +151,7 @@
     maxZoom: 10            // ✅ 限制最大缩放级别（不让用户放大到过于细节）
 });
 
-  const zoomThreshold = 5;
+  const zoomThreshold = 4;
 
   map.on('load', () => {
       // Load Counties
