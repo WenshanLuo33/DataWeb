@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Wenshan Luo" />
+    <meta name="keywords" content="urban design, commuting, data visualization, new york" />
+    <title>Women in Parliament Map</title>
+
+    <!-- CSS 样式 -->
+    <link rel="stylesheet" href="../style.css" />
+
+    <!-- Mapbox CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="nav-title" href="../index.html">Wen 3</a>
+        <a class="nav-link" href="../pages/about.html">About</a>
+        <a class="nav-link" href="../pages/writing.html">Writing</a>
+        <a class="nav-link" href="mailto:wl763@cornell.edu">Contact</a>
+      </nav>
+    </header>
+
+    <div id="map"></div>
+
+    <!-- 📌 地图信息框 -->
+    <div id="map-info">
+      <div id="legend">
+        <h2 class="legend-title">Number of Countries per % Women in Parliament</h2>
+        <p class="legend-description">
+          This map visualizes the estimated <strong>Number of Countries per % Women in Parliament</strong> in the world using
+          <strong>Quantiles (Equal Count)</strong>. Darker colors indicate higher percentages of women in parliament.
+        </p>
+        <hr>
+        <h4>% Women in Parliament</h4>
+        <div><span style="background:#fee5d9"></span> 0.0% - 8.62%</div>
+        <div><span style="background:#fcae91"></span> 10.34% - 19.71%</div>
+        <div><span style="background:#fb6a4a"></span> 19.78% - 27.38%</div>
+        <div><span style="background:#de2d26"></span> 27.7% - 35.71%</div>
+        <div><span style="background:#a50f15"></span> 36.09% - 61.25%</div>
+      </div>
+    </div>
+
+    <!-- Map JS -->
+    <script src="./map.js"></script>
+  </body>
+</html>

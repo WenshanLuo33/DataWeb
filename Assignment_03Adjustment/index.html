@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Wenshan Luo" />
+    <meta name="keywords" content="architecture design, storytelling, urban design, new york" />
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="nav-title" href="../index.html">Wen 3</a>
+        <a class="nav-link" href="../pages/about.html">About</a>
+        <a class="nav-link" href="../pages/writing.html">Writing</a>
+        <a class="nav-link" href="mailto:wl763@cornell.edu">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <!-- ✅ 介绍部分，带有 Colab Notebook 链接 -->
+      <section id="introduction">
+        <h1>Exploring Urban Data through Web Mapping</h1>
+        <p>
+          This dataset presents the percentage of female legislators in parliaments worldwide, based on data from Our World in Data. Analyzing this data helps to understand the progress and disparities among countries in promoting gender equality and women’s political participation. By applying different classification methods—such as quantiles, equal intervals, natural breaks, and standard deviation—we can visualize which countries excel in gender representation and which still face significant gaps. Additionally, this analysis provides valuable insights for policymakers to foster more inclusive political environments. To enhance spatial representation, I will apply three different projection maps, allowing for a comparative perspective on how data is interpreted across varying cartographic views.
+        </p>
+
+        <p>
+          
+          All data processing and analysis were conducted in 
+          <a href="https://colab.research.google.com/drive/1PCYUbNfYAv22B-DTA1T0_EIzezEs5gaB#scrollTo=92Use8Kqjgj9" target="_blank">
+            my Colab notebook
+          </a>.
+        </p>
+      </section>
+    
+      <!-- ✅ 这里是地图项目部分 -->  
+      <section id="projects reveal">
+        <div class="project">
+          <a href="Map01/index.html">
+            <img class="project-thumbnail" src="picture/01new.png" alt="Natural Breaks" />
+          </a>
+          <p class="project-title">Natural Breaks with Mercator projection</p>
+        </div>
+
+        <div class="project reveal">
+          <a href="Map02/index.html">
+            <img class="project-thumbnail" src="picture/02new.png" alt="Web Map" />
+          </a>
+          <p class="project-title">Quantiles with Global Map</p>
+        </div>
+        
+        <div class="project reveal">
+          <a href="Map03/index.html">
+            <img class="project-thumbnail" src="picture/03new.png" alt="Web Map" />
+          </a>
+          <p class="project-title">Linear Gradient with Winkel Tripel projection</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2024 Wenshan Luo | <a href="mailto:wl763@cornell.edu">Email Me</a></p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
