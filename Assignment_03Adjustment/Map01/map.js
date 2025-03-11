@@ -12,9 +12,11 @@ const map = new mapboxgl.Map({
 // ✅ 添加地图控件
 map.addControl(new mapboxgl.NavigationControl());
 
-// 📌 加载 `Women_in_Parliament.geojson`
-map.on("load", function () {
-    console.log("✅ Map Loaded Successfully");
+    // ✅ 使用绝对路径加载 GeoJSON 文件
+    fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data/women_in_parliament.geojson')
+      .then(response => response.json())
+      .then(data => {
+          console.log("✅ GeoJSON 数据加载成功:", data);
 
     map.addSource("women-parliament-data", {
         type: "geojson",
