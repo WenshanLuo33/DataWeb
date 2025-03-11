@@ -18,7 +18,7 @@ map.on("load", function () {
 
     map.addSource("women-parliament-data", {
         type: "geojson",
-        data: "../Map01/data/Women_in_Parliament.geojson"
+        data: "../Map01/data/women_in_parliament.geojson"
     });
 
     // ✅ 线性渐变颜色映射（从 Colab Altair 代码转换）
