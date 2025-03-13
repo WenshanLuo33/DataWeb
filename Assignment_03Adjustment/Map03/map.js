@@ -21,12 +21,14 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
 
       map.on("load", function () {
           console.log("✅ Map Loaded Successfully");
-          
-    map.addSource("women-parliament-data", {
-        type: "geojson",
-        data: "../Map01/data/women_in_parliament.geojson"
-    });
 
+          // ✅ 只添加一次 `map.addSource()`
+          map.addSource("women-parliament-data", {
+              type: "geojson",
+              data: data
+          });
+
+        
     // ✅ 线性渐变颜色映射（从 Colab Altair 代码转换）
     const minValue = 0;  // ✅ 你的数据最小值
     const maxValue = 100; // ✅ 你的数据最大值
