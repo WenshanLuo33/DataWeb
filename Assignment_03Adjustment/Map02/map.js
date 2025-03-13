@@ -21,10 +21,16 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
       map.on("load", function () {
           console.log("✅ Map Loaded Successfully");
 
-    map.addSource("women-parliament-data", {
-        type: "geojson",
-        data: "../Map01/data/women_in_parliament.geojson"
-    });
+          // ✅ 只添加一次 `map.addSource()`
+          map.addSource("women-parliament-data", {
+              type: "geojson",
+              data: data
+          });
+
+          // ✅ Jenks Natural Breaks（你的 Colab 计算出的分级）
+          const breaks = [0.0, 8.6, 21.6, 31.0, 41.0, 61.2];  
+          const colors = ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"];
+
 
 
     // ✅ 添加女性议员比例数据图层
