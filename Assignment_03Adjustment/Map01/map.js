@@ -18,7 +18,7 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
   .then(data => {
       console.log("✅ GeoJSON 数据成功加载:", data);
 
-      map.on("load", function () {
+    map.on("load", function () {
           console.log("✅ Map Loaded Successfully");
 
           // ✅ 确保数据已经获取后再 addSource
