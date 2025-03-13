@@ -81,46 +81,4 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
               map.getCanvas().style.cursor = "";
           });
 
-          // ✅ 添加图例
-          addLegend(breaks, colors);
-      });
-  })
-  .catch(error => console.error('❌ 加载 GeoJSON 失败:', error));
-
-// ✅ 添加 `addLegend()` 函数
-function addLegend(breaks, colors) {
-    const legend = document.createElement("div");
-    legend.style.position = "absolute";
-    legend.style.bottom = "10px";
-    legend.style.right = "10px";
-    legend.style.background = "white";
-    legend.style.padding = "10px";
-    legend.style.borderRadius = "4px";
-    legend.style.boxShadow = "0 0 10px rgba(0,0,0,0.2)";
-
-    let legendTitle = document.createElement("h4");
-    legendTitle.innerText = "Women in Parliament (%)";
-    legend.appendChild(legendTitle);
-
-    for (let i = 0; i < breaks.length - 1; i++) {
-        let row = document.createElement("div");
-        row.style.display = "flex";
-        row.style.alignItems = "center";
-        row.style.marginBottom = "5px";
-
-        let colorBox = document.createElement("div");
-        colorBox.style.width = "15px";
-        colorBox.style.height = "15px";
-        colorBox.style.backgroundColor = colors[i];
-        colorBox.style.marginRight = "8px";
-        row.appendChild(colorBox);
-
-        let label = document.createElement("span");
-        label.innerText = `${breaks[i]} - ${breaks[i + 1]}%`;
-        row.appendChild(label);
-
-        legend.appendChild(row);
-    }
-
-    document.body.appendChild(legend);
-}
+        
