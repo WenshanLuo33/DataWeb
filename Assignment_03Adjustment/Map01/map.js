@@ -36,7 +36,7 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
               id: "women-parliament-layer",
               type: "fill",
               source: "women-parliament-data",
-              filter: [">", ["to-number", ["get", "Lower chamber female legislators (aggregate: average)"]], 0],  // 🚀 只显示数值大于 0 的国家
+              filter: [">", ["to-number", ["get", "Lower chamber female legislators (aggregate: average)"]], 0],  
               paint: {
                   "fill-color": [
                       "interpolate",
@@ -81,4 +81,6 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
               map.getCanvas().style.cursor = "";
           });
 
-        
+      }); // ✅ 正确闭合 `map.on("load", function () {...})`
+  })
+  .catch(error => console.error('❌ 加载 GeoJSON 失败:', error)); // ✅ 正确闭合 `.then(data => {...})`
