@@ -61,6 +61,25 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
 
           console.log("✅ Women in Parliament Layer Added");
 
+          // ✅ **确保 `country-label` 在最上方**
+          setTimeout(() => {
+              const style = map.getStyle();
+              console.log("📌 Mapbox Style Loaded", style);
+
+              // 🔍 **动态查找可能的 `country-label` 图层**
+              const countryLabelLayer = style.layers.find(layer => 
+                  layer.id.includes("country") && layer.type === "symbol"
+              );
+
+              if (countryLabelLayer) {
+                  console.log(`🟢 找到国家标签层: ${countryLabelLayer.id}`);
+                  map.moveLayer(countryLabelLayer.id);
+              } else {
+                  console.warn("⚠️ 未找到 `country-label` 相关图层，可能样式不同。");
+              }
+          }, 1000); // 等待 1 秒，确保 Mapbox 样式加载完成
+          
+
           // 📌 点击时显示女性议员比例信息
           map.on("click", "women-parliament-layer", function (e) {
               let props = e.features[0].properties;
