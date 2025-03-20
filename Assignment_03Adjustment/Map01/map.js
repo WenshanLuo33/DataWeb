@@ -56,37 +56,6 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
           console.log("✅ Women in Parliament Layer Added");
 
 
-          // ✅ **手动添加国家名称文本图层**
-          map.addLayer({
-              id: "country-label-layer",
-              type: "symbol",
-              source: "women-parliament-data",
-              layout: {
-                  "text-field": ["get", "Entity"],  // 读取国家名称
-                  "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
-                  "text-size": 14,
-                  "text-allow-overlap": true,  // ✅ 允许文本与其他图层重叠
-                  "text-ignore-placement": true // ✅ 忽略其他图层对文本的影响
-              },
-              paint: {
-                  "text-color": "#000000",  // 黑色文本
-                  "text-halo-color": "#ffffff",  // 白色描边
-                  "text-halo-width": 1.5  // 文字描边宽度
-              }
-          });
-
-          console.log("✅ Country Label Layer Added");
-
-          // ✅ **确保文本图层在最上层**
-          setTimeout(() => {
-              try {
-                  map.moveLayer("country-label-layer");
-                  console.log("✅ Country Label Layer moved to top.");
-              } catch (error) {
-                  console.warn("⚠️ Cannot move country-label-layer, it may not exist yet.");
-              }
-          }, 500);  // 延迟 500ms 确保图层已经加载
-
           
           // 📌 点击时显示女性议员比例信息
           map.on("click", "women-parliament-layer", function (e) {
