@@ -55,6 +55,9 @@ fetch('https://wenshanluo33.github.io/DataWeb/Assignment_03Adjustment/Map01/data
 
           console.log("✅ Women in Parliament Layer Added");
 
+          // ✅ **确保文本图层始终位于最上方**
+          map.moveLayer("country-label-layer");
+
           // 📌 点击时显示女性议员比例信息
           map.on("click", "women-parliament-layer", function (e) {
               let props = e.features[0].properties;
