@@ -531,3 +531,21 @@ body {
 #introduction a:hover {
   text-decoration: underline;
 }
+
+
+
+
+.project-description {
+  max-width: 700px;
+  margin: 0 auto; /* 自动左右居中 */
+  padding: 1rem 1.5rem; /* 可选，增加内边距 */
+  line-height: 1.6;
+}
+
+.project-image {
+  display: block;            /* 让图片作为块元素独占一行 */
+  max-width: 70%;          /* 控制最大宽度（你也可以设置成 70% 试试看） */
+  width: 100%;               /* 自动适配小屏幕 */
+  margin: 2rem auto;         /* 上下间距 + 左右自动居中 */
+  border-radius: 8px;        /* 可选：让图片有圆角，更优雅 */
+}
